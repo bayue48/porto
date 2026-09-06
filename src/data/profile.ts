@@ -21,12 +21,12 @@ export const profile = {
   education: [
     {
       institution: "Arkademy",
-      degree: "Fullstack Developer Bootcamp",
+      degree: "Full Stack Mobile Developer Bootcamp",
       year: "2021",
     },
     {
       institution: "SMK Negeri 1 Tuban",
-      degree: "Computer and Network Engineering",
+      degree: "Computer Systems Networking and Telecommunications",
       year: "2015–2018",
     },
   ],
