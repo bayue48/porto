@@ -19,7 +19,7 @@ export const projectDetails: Record<string, { description: string; stack: string
   "novelpia-reader": { description: "A desktop reader and command-line downloader for Novelpia novels, with offline reading, background downloads, and EPUB export.", stack: ["Rust", "Tauri", "React"], category: "Desktop apps" },
   "sketchbook_": { description: "A single-page art timelapse portfolio — a compact gallery for sketches and finished pieces, live at sketchbook.bayue.my.id.", stack: ["React", "Vite", "Tailwind CSS"], category: "Web apps" },
   "pixeldrain-bypasser": { description: "A batch downloader for Pixeldrain albums and lists, with resumable downloads, completed-file skipping, and download status tracking.", stack: ["PowerShell", "aria2c"], category: "Tools" },
-  porto: { description: "The portfolio you’re exploring: a responsive site with an interactive terminal, filterable projects, and GitHub activity, built with Next.js and Tailwind CSS.", stack: ["TypeScript", "Next.js", "Tailwind CSS"], category: "Web apps" },
+  porto: { description: "The portfolio you’re exploring: a responsive site with an interactive terminal, filterable projects, and GitHub activity, built with Next.js and Tailwind CSS.", stack: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion"], category: "Web apps" },
 };
 
 export function getProjectCategory(project: Project) {
