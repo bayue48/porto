@@ -13,7 +13,7 @@ export interface Project {
 }
 
 export const projectDetails: Record<string, { description: string; stack: string[]; category: string }> = {
-  gitSdm: { description: "Explore a codebase without getting lost in it. A visual tool for mapping repository structure, dependencies, and the connections between files.", stack: ["TypeScript", "Next.js", "AI"], category: "Web apps" },
+  gitSdm: { description: "Explore a codebase without getting lost in it. A visual tool for mapping repository structure, dependencies, and the connections between files.", stack: ["React", "Vite", "Bun", "AI"], category: "Web apps" },
   "pia-scrap": { description: "From web content to your reading list. A Python scraper that collects content and brings it into a cleaner EPUB workflow.", stack: ["Python", "Beautiful Soup", "EPUB"], category: "Tools" },
   keking: { description: "A little more life in the server. A Discord music bot with playback commands and community utilities.", stack: ["Node.js", "Discord.js"], category: "Automation" },
   "novelpia-reader": { description: "A desktop reader and command-line downloader for Novelpia novels, with offline reading, background downloads, and EPUB export.", stack: ["Rust", "Tauri", "React"], category: "Desktop apps" },
