@@ -10,7 +10,7 @@ function ProjectVisual({ name, index }: { name: string; index: number }) {
     {name === "gitSdm" ? <div className="repo-graph"><span><GitBranch size={20} /></span><span>repository</span><div><span>src/</span><span>components/</span><span>data/</span></div></div>
       : name === "pia-scrap" ? <div className="scrape-flow"><span><FileCode2 size={27} />HTML</span><ArrowRight size={24} /><span><Braces size={27} />PARSE</span><ArrowRight size={24} /><span><BookOpen size={27} />EPUB</span></div>
       : name === "keking" ? <Music2 /> : name === "novelpia-reader" ? <BookOpen /> : name === "pixeldrain-bypasser" ? <Download /> : name === "porto" ? <Monitor /> : <Workflow />}
-    <span className="project-visual-label">{name === "gitSdm" ? "MAKE THE CONNECTIONS VISIBLE" : name === "pia-scrap" ? "COLLECT. CONVERT. READ." : name === "novelpia-reader" ? "YOUR LIBRARY. AVAILABLE OFFLINE." : name === "gSdmR" ? "MULTIPLE PROVIDERS. ONE API." : name === "pixeldrain-bypasser" ? "BATCH DOWNLOADS. READY TO RESUME." : name === "porto" ? "YOU’RE LOOKING AT IT." : "SMALL TOOLS. USEFUL POSSIBILITIES."}</span>
+    <span className="project-visual-label">{name === "gitSdm" ? "MAKE THE CONNECTIONS VISIBLE" : name === "pia-scrap" ? "COLLECT. CONVERT. READ." : name === "novelpia-reader" ? "YOUR LIBRARY. AVAILABLE OFFLINE." : name === "sketchbook_" ? "ART. ONE PAGE." : name === "pixeldrain-bypasser" ? "BATCH DOWNLOADS. READY TO RESUME." : name === "porto" ? "YOU’RE LOOKING AT IT." : "SMALL TOOLS. USEFUL POSSIBILITIES."}</span>
   </div>;
 }
 

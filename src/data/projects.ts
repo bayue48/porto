@@ -17,7 +17,7 @@ export const projectDetails: Record<string, { description: string; stack: string
   "pia-scrap": { description: "From web content to your reading list. A Python scraper that collects content and brings it into a cleaner EPUB workflow.", stack: ["Python", "Beautiful Soup", "EPUB"], category: "Tools" },
   keking: { description: "A little more life in the server. A Discord music bot with playback commands and community utilities.", stack: ["Node.js", "Discord.js"], category: "Automation" },
   "novelpia-reader": { description: "A desktop reader and command-line downloader for Novelpia novels, with offline reading, background downloads, and EPUB export.", stack: ["Rust", "Tauri", "React"], category: "Desktop apps" },
-  gSdmR: { description: "An OpenAI- and Anthropic-compatible API router with provider fallback, load balancing, and a dashboard for managing models, keys, and usage.", stack: ["Python", "FastAPI", "React"], category: "Backend" },
+  "sketchbook_": { description: "A single-page art portfolio — a compact gallery for sketches and finished pieces, live at sketchbook.bayue.my.id.", stack: ["TypeScript", "Next.js"], category: "Web apps" },
   "pixeldrain-bypasser": { description: "A batch downloader for Pixeldrain albums and lists, with resumable downloads, completed-file skipping, and download status tracking.", stack: ["PowerShell", "aria2c"], category: "Tools" },
   porto: { description: "The portfolio you’re exploring: a responsive site with an interactive terminal, filterable projects, and GitHub activity, built with Next.js and Tailwind CSS.", stack: ["TypeScript", "Next.js", "Tailwind CSS"], category: "Web apps" },
 };

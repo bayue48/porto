@@ -70,7 +70,7 @@ export const profile = {
     "pia-scrap",
     "keking",
     "novelpia-reader",
-    "gSdmR",
+    "sketchbook_",
     "pixeldrain-bypasser",
     "porto",
   ]
