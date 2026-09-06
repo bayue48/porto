@@ -224,7 +224,7 @@ export default function TerminalHero() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="min-w-0 flex-1 bg-transparent border-none focus:ring-0 text-slate-200 caret-emerald-400 font-mono placeholder-slate-700"
+          className="terminal-input min-w-0 flex-1 bg-transparent border-none outline-none focus:ring-0 focus:outline-none text-slate-200 caret-emerald-400 font-mono placeholder-slate-700"
           placeholder="type command here..."
           autoComplete="off"
           autoCorrect="off"

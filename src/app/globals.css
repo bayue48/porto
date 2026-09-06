@@ -42,6 +42,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; cursor: pointer; 
 a { text-decoration: none; transition: color 180ms, background 180ms, border-color 180ms; }
 button { font: inherit; transition: color 180ms, background 180ms, border-color 180ms; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.terminal-input:focus-visible { outline: none; }
 h1, h2, h3, h4, p { margin: 0; }
 h1, h2, h3, h4 { font-family: var(--font-archivo), Arial, sans-serif; }
 svg { flex-shrink: 0; }
