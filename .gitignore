@@ -54,3 +54,9 @@ node_modules
 # os
 .DS_Store
 desktop.ini
+
+.agent
+.kilo
+design-system
+.omo
+graphify-out

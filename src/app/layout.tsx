@@ -3,13 +3,13 @@ import { Archivo, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const archivo = Archivo({
-  variable: "--font-heading",
+  variable: "--font-archivo",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-body",
+  variable: "--font-space",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -40,9 +40,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${archivo.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0f172a] text-[#f8fafc]">
+      <head>
+        {/* Apply a saved preference before paint; only the root attribute changes. */}
+        <script dangerouslySetInnerHTML={{ __html: `try { document.documentElement.dataset.theme = localStorage.getItem("portfolio-theme") === "light" ? "light" : "dark"; } catch { document.documentElement.dataset.theme = "dark"; }` }} />
+      </head>
+      <body className="min-h-full">
         {children}
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Terminal, CornerDownLeft, Circle } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 
 interface CommandHistory {
@@ -11,6 +11,7 @@ interface CommandHistory {
 }
 
 export default function TerminalHero() {
+  const reducedMotion = useReducedMotion();
   const [input, setInput] = useState("");
   const terminalStreamRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,10 +46,10 @@ export default function TerminalHero() {
     if (terminalStreamRef.current) {
       terminalStreamRef.current.scrollTo({
         top: terminalStreamRef.current.scrollHeight,
-        behavior: "smooth",
+        behavior: reducedMotion ? "instant" : "smooth",
       });
     }
-  }, [history]);
+  }, [history, reducedMotion]);
 
   const focusInput = () => {
     inputRef.current?.focus();
@@ -196,7 +197,9 @@ export default function TerminalHero() {
                 </div>
               )}
               <motion.div
-                initial={{ opacity: 0, y: 5 }}
+                // The welcome message must render identically before hydration.
+                // Command responses are added only after user interaction.
+                initial={item.command === "system_init" || reducedMotion ? false : { opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
                 className="pl-2 border-l-2 border-slate-800/40"
@@ -217,10 +220,11 @@ export default function TerminalHero() {
         <input
           ref={inputRef}
           type="text"
+          aria-label="Terminal command"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-slate-200 caret-emerald-400 font-mono placeholder-slate-700"
+          className="min-w-0 flex-1 bg-transparent border-none focus:ring-0 text-slate-200 caret-emerald-400 font-mono placeholder-slate-700"
           placeholder="type command here..."
           autoComplete="off"
           autoCorrect="off"

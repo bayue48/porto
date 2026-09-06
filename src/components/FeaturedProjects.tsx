@@ -1,180 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
-import { Star, GitFork, ExternalLink, Terminal, ShieldAlert, Library, Sparkles, MessageSquareCode, Server } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { ArrowRight, ArrowUpRight, BookOpen, Braces, Download, FileCode2, GitBranch, Monitor, Music2, Star, Workflow } from "lucide-react";
 import ProjectDialog from "./ProjectDialog";
+import { getProjectCategory, projectDetails, type Project } from "@/data/projects";
 
-interface Project {
-  name: string;
-  description: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  html_url: string;
-  homepage: string | null;
-  topics: string[];
-  updated_at: string;
-  pushed_at: string;
-  created_at: string;
+function ProjectVisual({ name, index }: { name: string; index: number }) {
+  return <div className="project-visual" aria-hidden="true"><span className="project-index">PROJECT / {String(index + 1).padStart(2, "0")}</span>
+    {name === "gitSdm" ? <div className="repo-graph"><span><GitBranch size={20} /></span><span>repository</span><div><span>src/</span><span>components/</span><span>data/</span></div></div>
+      : name === "pia-scrap" ? <div className="scrape-flow"><span><FileCode2 size={27} />HTML</span><ArrowRight size={24} /><span><Braces size={27} />PARSE</span><ArrowRight size={24} /><span><BookOpen size={27} />EPUB</span></div>
+      : name === "keking" ? <Music2 /> : name === "novelpia-reader" ? <BookOpen /> : name === "pixeldrain-bypasser" ? <Download /> : name === "porto" ? <Monitor /> : <Workflow />}
+    <span className="project-visual-label">{name === "gitSdm" ? "MAKE THE CONNECTIONS VISIBLE" : name === "pia-scrap" ? "COLLECT. CONVERT. READ." : name === "novelpia-reader" ? "YOUR LIBRARY. AVAILABLE OFFLINE." : name === "gSdmR" ? "MULTIPLE PROVIDERS. ONE API." : name === "pixeldrain-bypasser" ? "BATCH DOWNLOADS. READY TO RESUME." : name === "porto" ? "YOU’RE LOOKING AT IT." : "SMALL TOOLS. USEFUL POSSIBILITIES."}</span>
+  </div>;
 }
 
-interface FeaturedProjectsProps {
-  repositories: Project[];
-}
-
-const CATEGORIES = ["All", "Web & Mobile Apps", "Backend & APIs", "Bots & Automation", "Scrapers & Tools", "Other"];
-
-const PROJECT_OVERRIDES: Record<string, { desc: string, stack: string[] }> = {
-  "gitSdm": { desc: "A tool I built to visualize repository structure and understand codebases faster. It helps explore files, dependencies, and project architecture in a more visual way.", stack: ["TypeScript", "Next.js", "AI"] },
-  "pia-scrap": { desc: "A Python-based scraper and automation tool for collecting web content and turning it into a cleaner EPUB workflow.", stack: ["Python", "BS4", "Epub"] },
-  "keking": { desc: "A Discord music bot project where I experimented with bot commands, playback features, and community server utilities.", stack: ["Node.js", "Discord.js"] },
-  "keking-bot": { desc: "Original Discord bot for music and server management, handling high concurrency.", stack: ["Node.js", "Discord.js"] },
-  "xrd": { desc: "A small React-based Discord utility project for working with role and command-related flows.", stack: ["TypeScript", "Node.js"] },
-  "xfa": { desc: "A Node.js-based worker and toolset around Discord/file workflows and automation experiments.", stack: ["Node.js", "Express"] },
-};
-
-export default function FeaturedProjects({ repositories }: FeaturedProjectsProps) {
-  const [activeTab, setActiveTab] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  // Assign categories to repos based on names/topics
-  const categorizeProject = (repoName: string): string => {
-    const name = repoName.toLowerCase();
-    if (name.includes("api") || name.includes("server") || name.includes("backend") || name.includes("cita") ||
-      name.includes("payung") || name.includes("xyz") || name.includes("-be")) {
-      return "Backend & APIs";
-    }
-    if (name.includes("gitsdm") || name.includes("dbid") || name.includes("app") || name.includes("web") ||
-      name.includes("mobile") || name.includes("-fe") || name.includes("frontend") || name.includes("porto")) {
-      return "Web & Mobile Apps";
-    }
-    if (name.includes("keking") || name.includes("bot") || name.includes("discord") || name.includes("jeta")) {
-      return "Bots & Automation";
-    }
-    if (name.includes("scrap") || name.includes("xfa") || name.includes("xrd")) {
-      return "Scrapers & Tools";
-    }
-    return "Other"; // default
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "Web & Mobile Apps":
-        return <Sparkles className="w-3.5 h-3.5" />;
-      case "Backend & APIs":
-        return <Server className="w-3.5 h-3.5" />;
-      case "Bots & Automation":
-        return <MessageSquareCode className="w-3.5 h-3.5" />;
-      case "Scrapers & Tools":
-        return <Terminal className="w-3.5 h-3.5" />;
-      case "Other":
-      default:
-        return <Library className="w-3.5 h-3.5" />;
-    }
-  };
-
-  const filteredRepos = repositories.filter((repo) => {
-    if (activeTab === "All") return true;
-    return categorizeProject(repo.name) === activeTab;
-  });
-
-  return (
-    <div className="space-y-6">
-      {/* Category selection tabs */}
-      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap sm:overflow-visible">
-        {CATEGORIES.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`flex items-center gap-1.5 px-4 py-2 border rounded-lg font-mono text-xs font-semibold cursor-pointer transition-all duration-200 whitespace-nowrap shrink-0 ${activeTab === tab
-              ? "bg-emerald-500 border-emerald-500 text-white shadow-md glow-border"
-              : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700"
-              }`}
-          >
-            {getCategoryIcon(tab)}
-            <span>{tab}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Grid of Projects */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence>
-          {filteredRepos.map((repo, idx) => {
-            const projectCategory = categorizeProject(repo.name);
-            return (
-              <motion.div
-                key={`${activeTab}-${repo.name}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: Math.min(idx * 0.04, 0.4), duration: 0.3 }}
-                onClick={() => setSelectedProject(repo)}
-                className="group relative flex flex-col justify-between bg-slate-900/40 border border-slate-800 hover:border-emerald-500/50 p-5 rounded-xl cursor-pointer transition-all duration-300 hover:bg-slate-900/80 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-              >
-                {/* Accent line top */}
-                <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-emerald-500/0 group-hover:via-emerald-500/60 to-transparent transition-all duration-300" />
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] px-2 py-0.5 bg-slate-950 text-slate-500 border border-slate-850 rounded font-mono uppercase tracking-wider">
-                      {projectCategory}
-                    </span>
-                    <div className="flex items-center gap-2.5 text-xs text-slate-500 font-mono">
-                      <span className="flex items-center gap-1">
-                        <Star className="w-3.5 h-3.5 text-amber-500/80" />
-                        {repo.stargazers_count}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <GitFork className="w-3.5 h-3.5 text-emerald-500/70" />
-                        {repo.forks_count}
-                      </span>
-                    </div>
-                  </div>
-
-                  <h4 className="text-base font-heading font-bold text-slate-200 group-hover:text-emerald-400 transition-colors duration-200">
-                    {repo.name}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm md:text-base line-clamp-3 leading-loose font-body">
-                    {PROJECT_OVERRIDES[repo.name]?.desc || repo.description || "No repository description has been configured."}
-                  </p>
-
-                  {PROJECT_OVERRIDES[repo.name]?.stack && (
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {PROJECT_OVERRIDES[repo.name].stack.map((tech) => (
-                        <span key={tech} className="px-1.5 py-0.5 bg-slate-950 border border-slate-800 rounded text-[10px] font-mono text-slate-400">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between mt-5 pt-3 border-t border-slate-850">
-                  <span className="text-xs font-mono text-slate-500">
-                    {repo.language || "Shell / Config"}
-                  </span>
-                  <span className="text-xs font-mono text-emerald-500 flex items-center gap-1 group-hover:underline">
-                    View Logs <ExternalLink className="w-3 h-3" />
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-
-      {filteredRepos.length === 0 && (
-        <div className="p-10 border border-dashed border-slate-800 rounded-xl text-center text-slate-500 space-y-2">
-          <ShieldAlert className="w-8 h-8 text-slate-600 mx-auto" />
-          <p className="font-mono text-sm">No repositories found in this category.</p>
-        </div>
-      )}
-
-      {/* Details Lightbox */}
-      <ProjectDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
-    </div>
-  );
+export default function FeaturedProjects({ repositories }: { repositories: Project[] }) {
+  const [active, setActive] = useState("All work");
+  const [selected, setSelected] = useState<Project | null>(null);
+  const categories = ["All work", ...new Set(repositories.map(getProjectCategory))];
+  const filtered = repositories.filter(project => active === "All work" || getProjectCategory(project) === active);
+  return <div><div className="project-filters" aria-label="Filter projects">{categories.map(category => <button key={category} aria-pressed={active === category} onClick={() => setActive(category)}>{category}</button>)}</div>
+    <div className="projects-grid">{filtered.map(project => {
+      const details = projectDetails[project.name];
+      const description = details?.description || project.description || "Explore the source and documentation on GitHub.";
+      return <article className="project-card" key={project.name}>
+        <ProjectVisual name={project.name} index={repositories.indexOf(project)} />
+        <div className="project-content"><div className="project-title-row"><h3>{project.name}</h3><button className="project-open" aria-label={`View ${project.name} details`} onClick={() => setSelected({ ...project, description })}><ArrowUpRight size={20} /></button></div><p>{description}</p><div className="project-bottom"><div className="project-tags">{(details?.stack || [project.language || "Source code"]).map(tech => <span className="tag" key={tech}>{tech}</span>)}</div>{project.stargazers_count !== undefined && <span className="project-stars" aria-label={`${project.stargazers_count} GitHub stars`}><Star size={13} />{project.stargazers_count}</span>}</div></div>
+      </article>;
+    })}</div>
+    {filtered.length === 0 && <p className="empty-state">No projects in this category yet.</p>}
+    <ProjectDialog project={selected} onClose={() => setSelected(null)} />
+  </div>;
 }

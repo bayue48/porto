@@ -1,53 +1,29 @@
-import React from "react";
-import { Sparkles, FileText, ArrowRight, Mail } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Braces, Database, Globe2, Server } from "lucide-react";
 import { profile } from "@/data/profile";
-import TerminalHero from "./TerminalHero";
 
 export default function HeroSection() {
   return (
-    <section id="hero" className="scroll-mt-24 space-y-12 pt-4">
-      <div className="text-center space-y-6 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-[11px] font-mono text-emerald-400">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{profile.role}</span>
+    <section id="hero" className="hero">
+      <div className="hero-copy">
+        <p className="eyebrow"><span className="status-dot" /> Backend engineer · Indonesia</p>
+        <h1>Good software.<br />Starts <span>under<br className="desktop-break" /> the hood.</span></h1>
+        <p className="hero-description">I’m {profile.shortName}. I build APIs, work with databases, and keep the systems behind the screen running.</p>
+        <div className="hero-actions">
+          <a href="#projects" className="button button-primary">Explore my work <ArrowDown size={17} /></a>
+          <a href={`mailto:${profile.email}`} className="text-link">Let’s talk <ArrowUpRight size={17} /></a>
         </div>
-        
-        <h1 className="text-4xl md:text-6xl font-heading font-black tracking-tight text-slate-100 leading-none">
-          {profile.shortName}
-        </h1>
-        
-        <p className="text-slate-400 font-body text-sm md:text-base leading-relaxed">
-          {profile.tagline}
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <a
-            href="#projects"
-            className="flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg transition-colors duration-200"
-          >
-            <span>View Projects</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-          <a
-            href="/cv-bayu-erich.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-slate-200 font-medium rounded-lg transition-colors duration-200"
-          >
-            <FileText className="w-4 h-4" />
-            <span>Download CV</span>
-          </a>
-          <a
-            href="#contact"
-            className="flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-slate-800/50 border border-slate-700 text-slate-300 font-medium rounded-lg transition-colors duration-200"
-          >
-            <Mail className="w-4 h-4" />
-            <span>Contact Me</span>
-          </a>
-        </div>
+        <div className="hero-footnote"><span>BASED IN TUBAN, ID</span><span>BUILDING FOR THE WEB</span></div>
       </div>
-
-      <TerminalHero />
+      <div className="architecture" role="img" aria-label="Backend architecture illustration: a client connects to an API service, which connects to a database and a background worker.">
+        <div className="architecture-caption"><span><span className="status-dot" /> THE PART YOU DON’T SEE</span><Braces size={17} /></div>
+        <div className="system-node client-node"><Globe2 size={19} /><span>Client request</span><span className="node-code">HTTPS</span></div>
+        <div className="connector connector-top"><span>GET /something-good</span></div>
+        <div className="system-node api-node"><div className="api-icon"><Server size={28} /></div><div><span className="node-kicker">THE BACKEND</span><strong>Built to do the work.</strong><small>Logic. Integrations. Reliability.</small></div><span className="node-indicator" /></div>
+        <div className="connector-branch"><i /><i /></div>
+        <div className="system-bottom"><div className="system-node"><Database size={21} /><span>Database<small>Store what matters</small></span></div><div className="system-node"><Braces size={21} /><span>Worker<small>Handle the details</small></span></div></div>
+        <div className="architecture-footer"><span><i /> Request → response</span><span>One thoughtful layer at a time.</span></div>
+        <span className="diagram-index">FIG. 01 / BEHIND THE INTERFACE</span>
+      </div>
     </section>
   );
 }

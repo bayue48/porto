@@ -69,7 +69,9 @@ export const profile = {
     "gitSdm",
     "pia-scrap",
     "keking",
-    "xrd",
-    "xfa",
+    "novelpia-reader",
+    "gSdmR",
+    "pixeldrain-bypasser",
+    "porto",
   ]
 };

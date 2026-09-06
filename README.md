@@ -1,14 +1,15 @@
 # Bayu Erich Portfolio Website (porto)
 
-A modern, interactive developer portfolio built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**. The UI uses a **Vibrant Block Terminal IDE** style in Slate Dark Mode with Run Green accents.
+A modern, interactive developer portfolio built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**. The UI pairs a charcoal and green palette with editorial typography, an architecture diagram, and a project-first layout.
 
 ## Features
 
-- **Interactive Terminal Hero** — simulated shell commands: `help`, `about`, `projects`, `skills`, `activity`, `secret`
+- **Light / Dark Mode** — header toggle with a saved preference; charcoal and green remains the default.
+- **Interactive Terminal** — an expandable shell in the About section with commands for profile, work, skills, projects, and contact.
 - **GitHub Dashboard** — repository stats, stars, language breakdown, contribution-style metrics
-- **Filterable Projects Grid** — category filters, hover states, project dialogs
+- **Filterable Projects Grid** — category filters, project diagrams, accessible native dialogs, and curated content when GitHub is unavailable
 - **Recent Activity Stream** — timeline-style GitHub activity display
-- **Contact Console** — terminal-inspired contact form
+- **Direct Contact** — email, LinkedIn, GitHub, and downloadable CV
 - **Responsive UI** — mobile-first layout, accessible contrast, dark terminal visual system
 
 ## Tech Stack
@@ -16,7 +17,7 @@ A modern, interactive developer portfolio built with **Next.js**, **React**, **T
 - **Framework:** Next.js App Router
 - **UI:** React, Tailwind CSS, Framer Motion, Lucide React
 - **Language:** TypeScript
-- **Package Manager:** pnpm
+- **Package Manager:** Bun (the existing pnpm lockfile remains for the Docker workflow)
 - **Runtime:** Node.js
 - **Container:** Docker / standalone Next.js output
 
@@ -50,18 +51,18 @@ porto/
 ### Prerequisites
 
 - Node.js 20+
-- pnpm 10+
+- Bun 1.4+
 
 ### Install
 
 ```bash
-pnpm install --ignore-scripts
+bun install --frozen-lockfile
 ```
 
 ### Run Dev Server
 
 ```bash
-pnpm dev
+bun run dev
 ```
 
 Open:
@@ -73,13 +74,13 @@ http://localhost:3000
 ### Build
 
 ```bash
-pnpm build
+bun run build
 ```
 
 ### Lint
 
 ```bash
-pnpm lint
+bun run lint
 ```
 
 ## Environment Variables
@@ -157,7 +158,7 @@ export default nextConfig;
 Then build:
 
 ```bash
-pnpm build
+bun run build
 ```
 
 Deploy the generated `out/` directory.

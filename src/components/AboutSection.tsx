@@ -1,23 +1,13 @@
-import React from "react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { profile } from "@/data/profile";
+import TerminalHero from "./TerminalHero";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="scroll-mt-24 space-y-8">
-      <div className="border-l-2 border-emerald-500 pl-4">
-        <h2 className="text-xl md:text-2xl font-heading font-bold text-slate-100 uppercase tracking-tight">
-          About Me
-        </h2>
-        <p className="text-slate-400 font-mono text-xs mt-1">
-          $ cat /var/log/syslog | grep &quot;profile&quot;
-        </p>
-      </div>
-
-      <div className="p-6 md:p-8 bg-slate-900/40 border border-slate-800 rounded-xl glass">
-        <p className="text-slate-300 font-body leading-relaxed md:text-lg">
-          {profile.summary}
-        </p>
-      </div>
+    <section id="about" className="section about-section">
+      <div className="section-heading"><div><p className="eyebrow">02 / A LITTLE CONTEXT</p><h2>A person behind<br />the pull requests.</h2></div><span className="location"><MapPin size={16} /> Tuban, East Java</span></div>
+      <div className="about-grid"><p className="about-statement">Practical problems.<br />Thoughtful solutions.<br /><span>Always learning.</span></p><div><p className="body-copy">{profile.summary}</p><a className="text-link" href="/cv-bayu-erich.pdf" target="_blank" rel="noopener noreferrer">The full story, in my CV <ArrowUpRight size={17} /></a></div></div>
+      <details className="terminal-disclosure"><summary><span className="mono">&gt;_</span> More of a terminal person?<span className="terminal-hint">Open interactive shell +</span></summary><TerminalHero /></details>
     </section>
   );
 }
